@@ -1,4 +1,5 @@
 import React, { createContext, useEffect, useState, useContext, ReactNode } from 'react'
+import { useRouter } from 'next/router'
 import Cookies from 'js-cookie'
 
 interface AuthContextType {
@@ -29,13 +30,16 @@ export const useAuth = (): AuthContextType => {
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [name, setName] = useState('')
+  const router = useRouter();
 
-    useEffect(() => {
-      const username = Cookies.get('name');
-      if (username) {
-        setName(username);
-      }
-    }, []);
+  useEffect(() => {
+    const username = Cookies.get('name');
+    if (username) {
+      setName(username);
+    } else {
+      router.push('/login')
+    }
+  }, []);
 
 
   const login = (name: string) => {
@@ -54,3 +58,4 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     </AuthContext.Provider>
   )
 }
+

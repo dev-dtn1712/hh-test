@@ -17,6 +17,11 @@ const PaginationComponent: React.FC<PaginationComponentProps> = ({
 
   return (
     <MuiPagination
+      sx={{
+        py: 8,
+        display: 'flex',
+        justifyContent: 'center'
+      }}
       count={totalPages}
       page={currentPage}
       onChange={handlePageChange}

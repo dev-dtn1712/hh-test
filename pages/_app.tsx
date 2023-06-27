@@ -3,9 +3,9 @@ import type { AppProps } from 'next/app'
 import CssBaseline from '@mui/material/CssBaseline'
 import { ThemeProvider } from '@mui/material/styles'
 import { CacheProvider } from '@emotion/react'
-import { AuthProvider } from '../contexts/AuthContext'
+import { AuthProvider } from '@/contexts/AuthContext'
 
-import theme from '../config/theme'
+import theme from '../theme/muiTheme'
 import createEmotionCache from '../config/createEmotionCache'
 import Layout from '@/containers/Layout/Layout'
 

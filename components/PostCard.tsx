@@ -9,7 +9,7 @@ interface PostCardProps {
 
 const PostCard: React.FC<PostCardProps> = ({ data }) => {
   return (
-    <Card variant="outlined" sx={{ minHeight: 220 }}>
+    <Card variant="outlined" sx={{ minHeight: 150 }}>
       <CardContent>
         <Typography variant="h6" component="div">
           {data.title}

@@ -1,14 +1,15 @@
 import React, { useContext, useState } from 'react'
 
 import Grid from '@mui/material/Grid'
-import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
+
 import PostCard from '@/components/PostCard'
 import Pagination from '@/components/Pagination'
-import CircularProgress from '@mui/material/CircularProgress';
+import LoadingError from '@/components/LoadingError'
+
+import useApi from '@/hooks/ApiHooks'
 import { AuthContext } from '@/contexts/AuthContext'
 import { PAGE_COUNT, POST_API_ENDPOINT } from '@/config/variants'
-import useApi from '@/hooks/ApiHooks'
 import { IPost } from '@/types'
 
 const Post: React.FC = () => {
@@ -26,22 +27,7 @@ const Post: React.FC = () => {
   };
 
   if (loading || error) {
-    return <Box
-        display="flex"
-        justifyContent="center"
-        alignItems="center"
-        py={40}
-      >
-        {loading && <CircularProgress />}
-        {error &&
-          <Typography
-            variant="h3"
-            component="h4"
-            color="error"
-          >
-            Error: {error.message}
-          </Typography>}
-      </Box>
+    return <LoadingError loading={loading} error={error} />
   }
 
   return (
@@ -55,18 +41,11 @@ const Post: React.FC = () => {
           </Grid>
         ))}
       </Grid>
-      <Box
-        display="flex"
-        justifyContent="flex-end"
-        alignItems="center"
-        py={2}
-      >
-        <Pagination
-          currentPage={currentPage}
-          totalPages={Math.ceil(data.length / PAGE_COUNT)}
-          onPageChange={handlePageChange}
-        />
-      </Box>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={Math.ceil(data.length / PAGE_COUNT)}
+        onPageChange={handlePageChange}
+      />
     </>
   )
 }
